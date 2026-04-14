@@ -1,0 +1,154 @@
+<!--
+    Amazon Q prompt used:
+    "Create a new HTML file with two Google Charts (a line chart and a bar chart) using
+    blank data markers that can be edited. Create both charts side by side andfrom a single shared data table,"
+  -->
+<!--
+    Amazon Q prompt used:
+    "please check over the data to ensure each element has an individual slice or bar. 
+    Make sure 
+  -->
+<!--
+    Just a note:
+    I had a lot of fun with this assignment since i used roster data from a game i play to make it. 
+    im planning to keep going after i finish this assignment too.
+  -->
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+      body {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        min-height: 100vh;
+        margin: 0;
+        font-family: "Helvetica Neue", sans-serif;
+        color: #eee;
+      }
+      h1 {
+        text-align: center;
+        letter-spacing: 3px;
+        font-size: 1.8em;
+        padding: 0.5em 0 0;
+        color: #f0d080;
+        text-shadow: 0 0 10px rgba(240,208,128,0.5);
+      }
+      .chart-container {
+        background: rgba(255,255,255,0.08);
+        border-radius: 12px;
+        backdrop-filter: blur(4px);
+        margin: 10px;
+        padding: 8px;
+      }
+      .legend-label {
+        color: #eee;
+        font-size: 0.9em;
+      }
+    </style>
+
+<script>
+     google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Element');
+        data.addColumn('number', 'Pyro');
+        data.addColumn('number', 'Hydro');
+        data.addColumn('number', 'Dendro');
+        data.addColumn('number', 'Electro');
+        data.addColumn('number', 'Anemo');
+        data.addColumn('number', 'Cryo');
+        data.addColumn('number', 'Geo');
+        data.addRows([
+          ['Pyro',    13, null, null, null, null, null, null],
+          ['Hydro',   null, 10, null, null, null, null, null],
+          ['Dendro',  null, null, 7,  null, null, null, null],
+          ['Electro', null, null, null, 14, null, null, null],
+          ['Anemo',   null, null, null, null, 13, null, null],
+          ['Cryo',    null, null, null, null, null, 12, null],
+          ['Geo',     null, null, null, null, null, null, 8]
+        ]);
+
+        var options = {
+          title: 'Characters per Element',
+          legend: { position: 'none' },
+          isStacked: true,
+          backgroundColor: 'transparent',
+          titleTextStyle: { color: '#fff' },
+          hAxis: { textStyle: { color: '#fff' }, titleTextStyle: { color: '#fff' } },
+          vAxis: { textStyle: { color: '#fff' }, titleTextStyle: { color: '#fff' } },
+          slices: {  
+                     1: {offset: 0.2}
+                     
+                    
+          },
+          colors: ['#ff6b35','#29d4ff','#7fff4f','#d966ff','#a0fff0','#b8d9ff','#ffd700']
+        };
+
+        var chart = new google.visualization.SteppedAreaChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+
+        var data2 = google.visualization.arrayToDataTable([
+          ['Element', 'Average Character Level', 'Average Total Talent Level', 'Average Constellation Level'],
+          ['Pyro',     60,  10,  3],
+          ['Hydro',    69,  13,  3],
+          ['Dendro',   54,   9,  2],
+          ['Electro',  60,  10,  3],
+          ['Anemo',    54,   8,  2],
+          ['Cryo',     54,  11,  2],
+          ['Geo',      69,  13,  3]
+        ]);
+
+        var options2 = {
+          title: 'Average Character Level per Element',
+          pointSize: 8,
+          lineWidth: 2,
+          backgroundColor: 'transparent',
+          titleTextStyle: { color: '#fff' },
+          hAxis: { textStyle: { color: '#fff' }, titleTextStyle: { color: '#fff' } },
+          vAxis: { textStyle: { color: '#fff' }, titleTextStyle: { color: '#fff' } },
+          legend: { textStyle: { color: '#fff' } },
+          colors: ['#ff6b35','#29d4ff','#ffd700'],
+          slices: {  
+                     1: {offset: 0.2}
+                     
+                    
+          },
+        };
+
+        var chart2 = new google.visualization.LineChart(document.getElementById('barchart'));
+
+        chart2.draw(data2, options2);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>✦ Genshin Impact Character Roster Statistics ✦</h1>
+    
+
+    <!-- Charts -->
+    <div style="display: flex; flex-direction: row;">
+      <div style="background: rgba(200,200,210,0.12); border-radius: 24px; margin: 6px; padding: 6px; flex: 1;">
+        <div id="piechart" style="width: 100%; height: 350px;"></div>
+      </div>
+      <div style="background: rgba(200,200,210,0.12); border-radius: 24px; margin: 6px; padding: 6px; flex: 1;">
+        <div id="barchart" style="width: 100%; height: 350px;"></div>
+      </div>
+    </div>
+
+    <!-- Legend row -->
+    <div style="display: flex; justify-content: center; gap: 20px; padding: 4px; flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; gap: 4px; background: white; border-radius: 999px; padding: 4px 10px;"><img src="pyro.png"    style="width:22px; height:22px; object-fit:contain;"><span style="font-size:0.8em; color:#222;">Pyro</span></div>
+      <div style="display: flex; align-items: center; gap: 4px; background: white; border-radius: 999px; padding: 4px 10px;"><img src="hydro.png"   style="width:22px; height:22px; object-fit:contain;"><span style="font-size:0.8em; color:#222;">Hydro</span></div>
+      <div style="display: flex; align-items: center; gap: 4px; background: white; border-radius: 999px; padding: 4px 10px;"><img src="dendro.jpg"  style="width:22px; height:22px; object-fit:contain;"><span style="font-size:0.8em; color:#222;">Dendro</span></div>
+      <div style="display: flex; align-items: center; gap: 4px; background: white; border-radius: 999px; padding: 4px 10px;"><img src="electro.png" style="width:22px; height:22px; object-fit:contain;"><span style="font-size:0.8em; color:#222;">Electro</span></div>
+      <div style="display: flex; align-items: center; gap: 4px; background: white; border-radius: 999px; padding: 4px 10px;"><img src="anemo.jpg"   style="width:22px; height:22px; object-fit:contain;"><span style="font-size:0.8em; color:#222;">Anemo</span></div>
+      <div style="display: flex; align-items: center; gap: 4px; background: white; border-radius: 999px; padding: 4px 10px;"><img src="cryo.png"    style="width:22px; height:22px; object-fit:contain;"><span style="font-size:0.8em; color:#222;">Cryo</span></div>
+      <div style="display: flex; align-items: center; gap: 4px; background: white; border-radius: 999px; padding: 4px 10px;"><img src="geo.jpg"     style="width:22px; height:22px; object-fit:contain;"><span style="font-size:0.8em; color:#222;">Geo</span></div>
+    </div>
+
+    <div id="piechart_3d" style="display:none;"></div>
+  </body>
+</html>
